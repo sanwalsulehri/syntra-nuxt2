@@ -7,7 +7,7 @@
       </router-link>
       <div class="links">
         <div v-for="(item, index) in links" :key="index">
-          <router-link :to="`/${item.link.toLowerCase()}`">
+          <router-link :to="item.href">
             <div class="link">
               <img :src="item.icon" class="img" alt="icon" />
               <span v-show="route.path !== '/messages' && route.path !== '/testresults'">{{ item.link }}</span>
@@ -48,11 +48,11 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 
 const links = [
-  { icon: dashoard, link: "Dashboard" },
-  { icon: forms, link: "Appointments & Forms" },
-  { icon: medical, link: "Medical Records" },
-  { icon: medication, link: "Medications" },
-  { icon: test, link: "Test Results" },
+  { icon: dashoard, href: "/", link: "Dashboard" },
+  { icon: forms, href: "/testresults", link: "Appointments & Forms" },
+  { icon: medical, href: "/records", link: "Medical Records" },
+  { icon: medication, href: "/medication", link: "Medications" },
+  { icon: test, href: "/profile", link: "Test Results" },
 ];
 
 const bottomLink = [
@@ -63,12 +63,12 @@ const bottomLink = [
   },
   {
     icon: message,
-    link: "#",
+    link: "/messages",
     label: "Message",
   },
   {
     icon: billing,
-    link: "#",
+    link: "/billing",
     label: "Billing",
   },
   {

@@ -1,12 +1,10 @@
 <template lang="">
-    <div>
-        
-    </div>
+    <MainLayout>
+        ss
+    </MainLayout>
 </template>
-<script>
-export default {
-    
-}
+<script setup>
+import MainLayout from '~/layout/MainLayout.vue';
 </script>
 <style lang="">
     

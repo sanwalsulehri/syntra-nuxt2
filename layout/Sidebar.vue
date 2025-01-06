@@ -1,15 +1,16 @@
 <template>
-  <div :class="['sidebar', { 'messages-view': route.path === '/messages' }]">
+  <div :class="['sidebar', { 'messages-view': route.path === '/messages' || route.path === '/testresults' }]">
     <div>
       <router-link to="/">
-        <img :src="logo" class="logo" />
+        <h3 class="fake-logo" v-show="route.path === '/messages' || route.path === '/testresults'">S</h3>
+        <img v-show="route.path !== '/messages' && route.path !== '/testresults'" :src="logo" class="logo" />
       </router-link>
       <div class="links">
         <div v-for="(item, index) in links" :key="index">
           <router-link :to="`/${item.link.toLowerCase()}`">
             <div class="link">
               <img :src="item.icon" class="img" alt="icon" />
-              <span v-show="route.path !== '/messages'">{{ item.link }}</span>
+              <span v-show="route.path !== '/messages' && route.path !== '/testresults'">{{ item.link }}</span>
             </div>
           </router-link>
         </div>
@@ -21,7 +22,7 @@
         <router-link :to="item.link">
           <div class="link">
             <img :src="item.icon" class="img" />
-            <span v-show="route.path !== '/messages'">{{ item.label }}</span>
+            <span v-show="route.path !== '/messages' && route.path !== '/testresults'">{{ item.label }}</span>
           </div>
         </router-link>
       </div>
@@ -93,6 +94,12 @@ const bottomLink = [
   transition: width 0.3s ease;
   z-index: 99999999;
   overflow: auto;
+}
+
+.fake-logo{
+  color: white;
+  text-align: center;
+  padding-top: 20px;
 }
 
 .sidebar.collapsed {
@@ -198,17 +205,20 @@ const bottomLink = [
 
 @media all and (max-width: 1024px) {
   .sidebar {
-    display: block;
+    display: none;
   }
 }
 
-.messages-view {
-  width: fit-content;
+.sidebar.messages-view {
+  width: fit-content !important;
   min-width: 60px;
+  max-width: fit-content;
   padding: 0 5px;
 }
 
-.messages-view .link {
+.sidebar.messages-view .link {
+  justify-content: center;
   padding: 12px 8px;
+  width: fit-content;
 }
 </style>

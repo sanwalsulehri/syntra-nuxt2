@@ -7,7 +7,7 @@
     </div>
 
     <!-- Content Area -->
-    <div class="content">
+    <div class="content" :style="{ paddingLeft: contentPadding }">
       <!-- Hamburger Menu -->
       <div class="burger" @click="toggleSidebar">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -16,7 +16,7 @@
       </div>
 
       <!-- Main Content -->
-      <div class="startContent">
+      <div class="startContent" :class="{ 'transparent-bg': isMessagesRoute }">
         <slot></slot>
       </div>
     </div>
@@ -24,14 +24,24 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useRoute } from 'vue-router';
 import Sidebar from "./Sidebar.vue";
 
+const route = useRoute();
 const isSidebarVisible = ref(false);
+
+const contentPadding = computed(() => {
+  return ['Messages', 'TestResults'].includes(route.name) ? '100px' : '330px';
+});
 
 const toggleSidebar = () => {
   isSidebarVisible.value = !isSidebarVisible.value;
 };
+
+const isMessagesRoute = computed(() => {
+  return route.name === 'Messages';
+});
 </script>
 
 
@@ -55,7 +65,6 @@ const toggleSidebar = () => {
 
 /* Content Section */
 .content {
-  padding-left: 330px;
   padding-top: 50px;
 }
 
@@ -71,11 +80,11 @@ const toggleSidebar = () => {
   position: fixed;
   left: 0;
   top: 0;
-  width: 280px;
   height: 100vh;
   background-color: #204887;
   z-index: 1000;
   transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
 }
 
 .desktop.is-visible {
@@ -86,12 +95,16 @@ const toggleSidebar = () => {
   background-color: white;
   min-height: 100vh;
   border-radius: 16px;
-  padding: 50px;
+  padding: 20px;
+}
+
+.startContent.transparent-bg {
+  background-color: transparent;
 }
 
 @media (max-width: 1024px) {
   .content {
-    padding-left: 16px;
+    padding-left: 16px !important;
     padding-right: 16px;
   }
 
@@ -107,8 +120,8 @@ const toggleSidebar = () => {
     transform: translateX(-100%);
   }
 
-  .desktop.is-visible {
+  /* .desktop.is-visible {
     transform: translateX(0);
-  }
+  } */
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['sidebar']">
+  <div :class="['sidebar', { 'messages-view': route.path === '/messages' }]">
     <div>
       <router-link to="/">
         <img :src="logo" class="logo" />
@@ -9,7 +9,7 @@
           <router-link :to="`/${item.link.toLowerCase()}`">
             <div class="link">
               <img :src="item.icon" class="img" alt="icon" />
-              <span>{{ item.link }}</span>
+              <span v-show="route.path !== '/messages'">{{ item.link }}</span>
             </div>
           </router-link>
         </div>
@@ -17,13 +17,13 @@
     </div>
 
     <div class="sidebar-bottom">
-      <div v-for="(item, index) in bottomLink" :key="index" class="">
+      <div v-for="(item, index) in bottomLink" :key="index">
         <router-link :to="item.link">
-        <div class="link">
-          <img :src="item.icon" class="img" />
-          <span>{{ item.label }}</span>
-        </div>
-      </router-link>
+          <div class="link">
+            <img :src="item.icon" class="img" />
+            <span v-show="route.path !== '/messages'">{{ item.label }}</span>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -42,6 +42,9 @@ import profile from "/profile.svg";
 import message from "/message.svg";
 import billing from "/billing.svg";
 import logout from "/logout.svg";
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 
 const links = [
   { icon: dashoard, link: "Dashboard" },
@@ -221,5 +224,15 @@ const bottomLink = [
   .sidebar {
     display: block;
   }
+}
+
+.messages-view {
+  width: fit-content;
+  min-width: 60px;
+  padding: 0 5px;
+}
+
+.messages-view .link {
+  padding: 12px 8px;
 }
 </style>

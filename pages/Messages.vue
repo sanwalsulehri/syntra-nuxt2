@@ -1,4 +1,5 @@
 <template>
+    <MainLayout>
   <div class="messages-container">
     <!-- Left sidebar -->
     <div class="sidebar">
@@ -62,21 +63,19 @@
       </div>
     </div>
   </div>
+</MainLayout>
 </template>
 
-<script>
-export default {
-  name: 'Messages'
-}
+<script setup>
+import MainLayout from '~/layout/MainLayout.vue'
 </script>
+
 
 <style scoped>
 .messages-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   background-color: #f5f5f5;
-  max-width: 80rem; /* 1280px */
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -86,7 +85,7 @@ export default {
   width: 100%;
   background-color: white;
   border-bottom: 1px solid #eee;
-  padding: 20px;
+  padding: 10px;
 }
 .sidebar h2{
     font-size: 20px;

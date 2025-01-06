@@ -124,7 +124,11 @@ const bottomLink = [
 .link img {
   width: 24px;
   height: 24px;
+  fill: currentColor;
+
 }
+
+
 
 .link:hover {
   background-color: #fff;
@@ -190,35 +194,7 @@ const bottomLink = [
   padding-top: 1px;
 }
 
-.collapse h1 {
-  font-size: 14px;
-  font-weight: 600;
-}
 
-.collapse {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: padding 0.3s ease;
-}
-
-.collapse:hover {
-  background-color: #4374c3;
-}
-
-.sidebar.collapsed .collapse h1 {
-  display: none;
-}
-
-.img {
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
-  color: white;
-}
 
 @media all and (max-width: 1024px) {
   .sidebar {
